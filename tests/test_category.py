@@ -1,91 +1,48 @@
 import pytest
 
-from src.category import Category
+
+def test_category(category_1, category_2, category_3):
+    assert category_1.name == "Auto"
+    assert category_2.description == "Телефоны и больше ничего"
+    assert len(category_2.products_list) == 2
+    assert category_1.category_count == 3
+    assert category_1.category_count == 3
+    assert category_1.category_count == 3
+    assert len(category_3.products_list) == 1
 
 
-@pytest.fixture(autouse=True)
-def reset_category_counts():
-    """Сброс количества категорий и продуктов перед каждым тестом."""
-    Category.category_count = 0
-    Category.product_count = 0
+def test_category_str(category_3):
+    assert category_3.products == "Продукт_1, 20 руб. Остаток: 99 шт. "
 
 
-def test_category_initialization():
-    # Создаем "продукты" в виде словарей
-    products = [
-        {"name": "Product1", "description": "Description1", "price": 100.0, "quantity": 1},
-        {"name": "Product2", "description": "Description2", "price": 200.0, "quantity": 2},
-    ]
-
-    # Создаем категорию
-    category = Category("Category1", "Description of Category_1", products)
-
-    # Проверяем правильность инициализации атрибутов
-    assert category.name == "Category1"
-    assert category.description == "Description of Category_1"
-    assert len(category.products) == 2
-
-    # Проверяем увеличение счетчиков
-    assert Category.category_count == 1
-    assert Category.product_count == 2
+def test_add_product(category_3, product_3):
+    category_3.add_product(product_3)
+    assert len(category_3.products_list) == 1
+    for product in category_3.products_list:
+        assert product.name == "Продукт_1"
+        assert product.price == 20
+        assert product.quantity == 198
 
 
-def test_empty_category():
-    # Создаем пустую категорию
-    category = Category("zero", "Description zero", [])
-
-    # Проверяем правильность инициализации атрибутов
-    assert category.name == "zero"
-    assert category.description == "Description zero"
-    assert len(category.products) == 0
-
-    # Проверяем увеличение счетчиков
-    assert Category.category_count == 1
-    assert Category.product_count == 0
+def test_add_category_not_product(category_3, fake_product):
+    with pytest.raises(TypeError):
+        category_3.add_product(fake_product)
 
 
-# def test_multiple_categories():
-#     # Создаем несколько категорий
-#     products1 = [
-#         {"name": "Product1", "description": "Description_1", "price": 100.0, "quantity": 1},
-#         {"name": "Product2", "description": "Description_2", "price": 200.0, "quantity": 2}
+def test_str_category(category_1):
+    assert str(category_1) == "Auto, количество продуктов: 1002 шт."
+
+
+def test_repr_category(category_3):
+    assert repr(category_3) == "Category: Продукт, products: [Продукт_1, 20 руб. Остаток: 99 шт.]"
+
+
+# def test_str_method():
+#     products = [
+#         {"name": "BMW", "description": "black", "price": 1000000, "quantity": 1}
 #     ]
-#     products2 = [
-#         {"name": "Product3", "description": "Description3", "price": 300.0, "quantity": 3},
-#         {"name": "Product4", "description": "Description4", "price": 400.0, "quantity": 4}
-#     ]
+#     category = Category("cars", "buying a car", products)
 #
-#     category1 = Category("Category_1", "Description of Category1", products1)
-#     category2 = Category("Category_2", "Description of Category2", products2)
-#
-#     # Проверяем правильность инициализации атрибутов для обеих категорий
-#     assert category1.name == "Category_1"
-#     assert len(category1.products) == 2
-#     assert category2.name == "Category_2"
-#     assert len(category2.products) == 2
-#
-#     # Проверяем увеличение счетчиков
-#     assert Category.category_count == 2
-#     assert Category.product_count == 4
-
-
-def test_repr_method():
-    products = [
-        {"name": "chocolate", "description": "delicious", "price": 100.0, "quantity": 5}
-    ]
-    category = Category("Magazine", "buying a products", products)
-
-    expected_repr = ("Category: Magazine, products: [{'name': 'chocolate', 'description': 'delicious', 'price': "
-                     "100.0, 'quantity': 5}]")
-    assert repr(category) == expected_repr
-
-
-def test_str_method():
-    products = [
-        {"name": "BMW", "description": "black", "price": 1000000, "quantity": 1}
-    ]
-    category = Category("cars", "buying a car", products)
-
-    expected_str = ("Category: cars, Products: {'name': 'BMW', 'description': 'black', 'price': "
-                    "1000000, 'quantity': 1}")
-    assert str(category) == expected_str
+#     expected_str = ("Category: cars, Products: {'name': 'BMW', 'description': 'black', 'price': "
+#                     "1000000, 'quantity': 1}")
+#     assert str(category) == expected_str
