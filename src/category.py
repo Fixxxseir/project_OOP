@@ -35,7 +35,7 @@ class Category:
         """Список товаров в виде строк в формате"""
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт. "
+            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
         return product_str
 
     @property

@@ -12,7 +12,7 @@ def test_category(category_1, category_2, category_3):
 
 
 def test_category_str(category_3):
-    assert category_3.products == "Продукт_1, 20 руб. Остаток: 99 шт. "
+    assert category_3.products == "Продукт_1, 20 руб. Остаток: 99 шт.\n"
 
 
 def test_add_product(category_3, product_3):
