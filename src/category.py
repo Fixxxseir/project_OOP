@@ -17,6 +17,15 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
+    def __repr__(self):
+        return f"Category: {self.name}, products: {self.__products}"
+
+    def __str__(self):
+        total_quantity = 0
+        for item in self.__products:
+            total_quantity += item.quantity
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
     def add_product(self, product):
         if isinstance(product, Product):
             for product in self.__products:
@@ -35,18 +44,56 @@ class Category:
         """Список товаров в виде строк в формате"""
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            product_str += f"{str(product)}\n"
         return product_str
 
     @property
     def products_list(self):
         return self.__products
 
-    def __repr__(self):
-        return f"Category: {self.name}, products: {self.__products}"
 
-    def __str__(self):
-        total_quantity = 0
-        for item in self.__products:
-            total_quantity += item.quantity
-        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def __str__(self):
+    #     total_quantity = 0
+    #     for item in self.__products:
+    #         total_quantity += item.quantity
+    #     return f"{self.name}, количество продуктов: {total_quantity} шт."
