@@ -20,10 +20,11 @@ def object_json(json_file: dict):
     product_objects = []
     category_objects = []
     for category in json_file:
-        category_objects.append(Category(**category))
-        for product in category.get("products", []):
+        for product in category["products"]:
             product_objects.append(Product(**product))
-    return category_objects, product_objects
+        category["products"] = product_objects
+        category_objects.append(Category(**category))
+    return category_objects
 
 
 if __name__ == "__main__":

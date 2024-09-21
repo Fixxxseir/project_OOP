@@ -18,7 +18,7 @@ class Category:
         Category.product_count += len(self.__products)
 
     def __repr__(self):
-        return f"Category: {self.name}, products: {self.__products}"
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.products})"
 
     def __str__(self):
         total_quantity = 0
@@ -40,7 +40,7 @@ class Category:
         Category.product_count += 1
 
     @property
-    def products(self): # __str__ ?
+    def products(self):  # __str__ ?
         """Список товаров в виде строк в формате"""
         product_str = ""
         for product in self.__products:
