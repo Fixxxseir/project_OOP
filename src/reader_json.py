@@ -7,7 +7,7 @@ from src.product import Product
 
 def reader_json(path_to_file: str) -> dict:
     """Функция получения данных из json"""
-    with open(path_to_file, encoding="UTF-8") as file:
+    with open(path_to_file, "r", encoding="UTF-8") as file:
         data_json = json.load(file)
     return data_json
 
