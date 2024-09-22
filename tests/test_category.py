@@ -34,7 +34,7 @@ def test_str_category(category_1):
 
 
 def test_repr_category(category_3):
-    assert repr(category_3) == "Category: Продукт, products: [Продукт_1, 20 руб. Остаток: 99 шт.]"
+    assert repr(category_3) == "Category(Продукт, Описание продукта, Продукт_1, 20 руб. Остаток: 99 шт.\n)"
 
 
 # def test_str_method():

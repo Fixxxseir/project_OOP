@@ -13,7 +13,16 @@ class Product:
         self.quantity = quantity
 
     def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
+
+    def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return round(self.__price * self.quantity + other.__price * other.quantity)
+        else:
+            raise TypeError
 
     @classmethod
     def new_product(cls, dict_product):

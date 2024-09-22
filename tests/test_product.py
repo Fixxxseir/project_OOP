@@ -1,3 +1,7 @@
+from unittest.mock import patch
+
+import pytest
+
 from src.product import Product
 
 
@@ -17,6 +21,14 @@ def test_product_price(product_1, capsys):
     assert product_1.price == 1000000
 
 
+@patch("builtins.input", return_value="y")
+def test_price_decrease_accept(mock_input, product_1, capsys):
+    product_1.price = 50  # Ставим новую цену меньше текущей
+    captured = capsys.readouterr()  # Считываем вывод
+    assert product_1.price == 50
+    assert "Цена была изменена на 50" in captured.out
+
+
 def test_new_product(product_2):
     product_new = Product.new_product(product_2)
     assert product_new.name == "Cars"
@@ -26,8 +38,25 @@ def test_new_product(product_2):
 
 
 def test_repr_product(product_1):
-    assert repr(product_1) == "Cars, 100000 руб. Остаток: 4 шт."
+    assert repr(product_1) == "Product(Cars, BMW, 100000, 4)"
+
+
+def test_str_product(product_3):
+    assert str(product_3) == "Продукт_1, 10 руб. Остаток: 99 шт."
 
 
 def test_price(product_1):
     assert product_1.price == 100000
+
+
+def test_add_product(product_1, product_3):
+    assert product_1 + product_3 == 400990
+
+
+def test_add_product_typeerror(category_1):
+    assert TypeError
+
+
+def test_product_type_error(product_1):
+    with pytest.raises(TypeError):
+        product_1 + 123123
