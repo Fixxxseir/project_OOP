@@ -1,7 +1,8 @@
 from src.product import Product
+from src.base_order import BaseOrderProduct
 
 
-class Category:
+class Category(BaseOrderProduct):
     """Класс представления категории продуктов."""
 
     name: str
