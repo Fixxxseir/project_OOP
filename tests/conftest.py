@@ -5,6 +5,7 @@ from src.product import Product
 from src.smartphone import Smartphone
 from src.lawngrass import LawnGrass
 
+
 @pytest.fixture
 def product_1():
     return Product(name="Cars", description="BMW", price=100000, quantity=4)
