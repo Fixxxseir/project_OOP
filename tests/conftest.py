@@ -67,14 +67,16 @@ def fake_product():
 
 @pytest.fixture
 def smartphone_1():
-    return Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                         "S23 Ultra", 256, "Серый")
+    return Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
 
 
 @pytest.fixture
 def smartphone_2():
-    return Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                         "S23 Ultra", 256, "Серый")
+    return Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
 
 
 @pytest.fixture
@@ -85,3 +87,32 @@ def lawngrass_1():
 @pytest.fixture
 def lawngrass_2():
     return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+
+@pytest.fixture
+def json_data():
+    return [
+        {
+            "name": "Смартфоны",
+            "description": "Смартфоны, как средство не только коммуникации,"
+            " но и получение дополнительных функций для удобства жизни",
+            "products": [
+                {
+                    "name": "Samsung Galaxy C23 Ultra",
+                    "description": "256GB, Серый цвет, 200MP камера",
+                    "price": 180000.0,
+                    "quantity": 5,
+                },
+                {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8},
+                {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14},
+            ],
+        },
+        {
+            "name": "Телевизоры",
+            "description": "Современный телевизор, который позволяет наслаждаться просмотром,"
+            " станет вашим другом и помощником",
+            "products": [
+                {"name": '55" QLED 4K', "description": "Фоновая подсветка", "price": 123000.0, "quantity": 7}
+            ],
+        },
+    ]
