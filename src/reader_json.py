@@ -17,14 +17,14 @@ data = reader_json(FILE_PATH)
 
 def object_json(json_file: dict):
     """Функция создания объектов класса из данных json"""
-    product_objects = []
-    category_objects = []
+    categories = []
     for category in json_file:
+        products_list = []
         for product in category["products"]:
-            product_objects.append(Product(**product))
-        category["products"] = product_objects
-        category_objects.append(Category(**category))
-    return category_objects
+            products_list.append(Product(**product))
+        category["products"] = products_list
+        categories.append(Category(**category))
+    return categories
 
 
 if __name__ == "__main__":
