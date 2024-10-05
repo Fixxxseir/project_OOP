@@ -60,3 +60,8 @@ def test_add_product_typeerror(category_1):
 def test_product_type_error(product_1):
     with pytest.raises(TypeError):
         product_1 + 123123
+
+
+def test_raises():
+    with pytest.raises(ValueError):
+        Product(name="Cars", description="BMW", price=100000, quantity=0)
