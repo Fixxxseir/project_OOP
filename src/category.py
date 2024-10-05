@@ -51,3 +51,16 @@ class Category(BaseOrderProduct):
     @property
     def products_list(self):
         return self.__products
+
+    def middle_price(self):
+        try:
+            total_price = 0
+            total_quantity = 0
+            for product in self.__products:
+                total_quantity = product.quantity
+                total_price = product.price * product.quantity
+            average_price = total_price / total_quantity
+        except ZeroDivisionError:
+            return 0
+        else:
+            return average_price
