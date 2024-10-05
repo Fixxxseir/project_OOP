@@ -1,4 +1,6 @@
 import pytest
+from src.category import Category
+from src.product import Product
 
 
 def test_category(category_1, category_2, category_3):
@@ -35,6 +37,20 @@ def test_str_category(category_1):
 
 def test_repr_category(category_3):
     assert repr(category_3) == "Category(Продукт, Описание продукта, Продукт_1, 20 руб. Остаток: 99 шт.\n)"
+
+
+def test_middle_price():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+    category1 = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+    assert category1.middle_price() == 31000.0
+
+
+def test_return_zero_midl_price():
+    category_empty1 = Category("Пустая категория", "Категория без продуктов", [])
+    assert category_empty1.middle_price() == 0
 
 
 # def test_str_method():
